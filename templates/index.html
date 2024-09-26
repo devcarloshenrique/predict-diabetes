@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction Form</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+
+    <section id="form-predict" class="container col-8 form-predict">
+        <h1>Predição de diabetes</h1>
+
+        <div class="form-wrap">
+            <form id="diabetes-form" action="predict" method="POST">
+                <div class="row g-3 mt-3s">
+                    <div class="col-md-6">
+                        <label for="Age" class="form-label">Idade:</label>
+                        <input type="number" class="form-control" id="Age" placeholder="Digite sua idade" name="Age"
+                            required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Pregnancies" class="form-label">Número de gravidez:</label>
+                        <input type="number" class="form-control" id="Pregnancies"
+                            placeholder="Digite o número de gravidez" name="Pregnancies" required>
+                    </div>
+                </div>
+
+                <div class="row g-3 mt-3s">
+                    <div class="col-md-6">
+                        <label for="Glucose" class="form-label">Glicose:</label>
+                        <input type="number" class="form-control" id="Glucose" placeholder="Digite o nível de glicose"
+                            name="Glucose" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="BloodPressure" class="form-label">Pressão arterial:</label>
+                        <input type="number" class="form-control" id="BloodPressure"
+                            placeholder="Digite a pressão arterial" name="BloodPressure" required>
+                    </div>
+                </div>
+
+                <div class="row g-3 mt-3s">
+                    <div class="col-md-6">
+                        <label for="SkinThickness" class="form-label">Espessura da pele:</label>
+                        <input type="number" class="form-control" id="SkinThickness"
+                            placeholder="Digite a espessura da pele mm" name="SkinThickness" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Insulin" class="form-label">Insulina:</label>
+                        <input type="number" class="form-control" id="Insulin" placeholder="Digite o nível de insulina"
+                            name="Insulin" required>
+                    </div>
+                </div>
+
+                <div class="row g-3 mt-3s">
+                    <div class="col-lg-4 col-12">
+                        <label for="BMI" class="form-label">Índice de massa corporal:</label>
+                        <input type="number" step="0.1" class="form-control" id="BMI" placeholder="Digite seu IMC"
+                            name="BMI" required>
+                    </div>
+                    <div class="col-lg-2 align-content-end">
+                        <button type="button" id="btn-imc" class="btn btn-primary btn-block" data-bs-toggle="modal"
+                            data-bs-target="#imc-modal">Calcular</button>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="DiabetesPedigreeFunction" class="form-label">Diabetes Pedigree Function:</label>
+                        <input type="number" step="0.001" class="form-control" id="DiabetesPedigreeFunction"
+                            placeholder="Digite o índice pedigree do diabetes" name="DiabetesPedigreeFunction" required>
+                    </div>
+                </div>
+
+                <div class="row justify-content-end">
+                    <div class="col-lg-4 col-12 mt-3">
+                        <button type="submit" id="submit" class="btn btn-primary btn-block">Calcular Predição</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Modal IMC-->
+    <div class="modal fade" id="imc-modal" tabindex="-1" aria-labelledby="imc-modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="imc-modal-label">Calcule seu IMC</h1>
+                    <button type="button" class="btn-close" id="close-modal-imc" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <form id="imc-form">
+                    <div class="modal-body">
+                        <div class="row g-3 mt-3s">
+                            <div class="col-md-6">
+                                <input type="number" class="form-control" id="kilos" placeholder="Peso (kg)" name="kilos" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="number" class="form-control" id="centimetros" placeholder="Altura (cm)" name="centrimetros" required>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3 px-2">
+                            <strong class="">IMC: <label id="imc-label"></label></strong>
+                        </div>
+
+                        <div class="row mt-3 ps-3 pe-2">
+                            <div class="col-8">
+                                <p>menos de 18.5 Kg/m²</p>
+                            </div>
+                            <div class="col-4">
+                                <p class="text-end">Baixo peso</p>
+                            </div>
+                        </div>
+                        <hr class="mt-0 mb-3 ms-3">
+                        <div class="row ps-3 pe-2">
+                            <div class="col">
+                                <p>18.5 a 25 Kg/m²</p>
+                            </div>
+                            <div class="col">
+                                <p class="text-end">Normal ou Eutrófico</p>
+                            </div>
+                        </div>
+                        <hr class="mt-0 mb-3 ms-3">
+                        <div class="row ps-3 pe-2">
+                            <div class="col">
+                                <p>25 a 30 Kg/m²</p>
+                            </div>
+                            <div class="col">
+                                <p class="text-end">Sobrepeso</p>
+                            </div>
+                        </div>
+                        <hr class="mt-0 mb-3 ms-3">
+                        <div class="row ps-3 pe-2">
+                            <div class="col-8">
+                                <p>30 a 35 Kg/m²</p>
+                            </div>
+                            <div class="col-4">
+                                <p class="text-end">Obesidade I</p>
+                            </div>
+                        </div>
+                        <hr class="mt-0 mb-3 ms-3">
+                        <div class="row ps-3 pe-2">
+                            <div class="col-8">
+                                <p>35 a 40 Kg/m²</p>
+                            </div>
+                            <div class="col-4">
+                                <p class="text-end">Obesidade II</p>
+                            </div>
+                        </div>
+                        <hr class="mt-0 mb-3 ms-3">
+                        <div class="row ps-3 pe-2">
+                            <div class="col-8">
+                                <p class="mb-1">40 Kg/m² ou mais</p>
+                            </div>
+                            <div class="col-4">
+                                <p class="text-end mb-1">Obesidade III</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="col-4">
+                            <button type="submit" id="btn-past-imc" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <div class="row">
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Predição -->
+    <div class="modal fade" id="predict" tabindex="-1" aria-labelledby="predict-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="predict-title"></h1>
+                    <button type="button" class="btn-close" id="close-modal-imc" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="predict-description" class="mt-3"></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <div class="row">
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function showModal() {
+            var myModal = new bootstrap.Modal(document.getElementById('predict'));
+            myModal.show();
+        }
+
+        // IMC calculo 
+        function calcularIMC() {
+            const kilos = document.getElementById('kilos').value;
+            const centimetros = document.getElementById('centimetros').value;
+
+            if (kilos && centimetros) {
+                const alturaEmMetros = centimetros / 100;
+                const imc = (kilos / (alturaEmMetros * alturaEmMetros)).toFixed(1);
+
+                // Atualiza o rótulo de IMC
+                document.getElementById('imc-label').textContent = `${imc}`;
+
+                document.getElementById('btn-past-imc').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const inputImc = document.getElementById('BMI');
+                    inputImc.value = imc
+                    document.getElementById('close-modal-imc').click();
+                });
+            }
+        }
+
+        document.getElementById('kilos').addEventListener('input', calcularIMC);
+        document.getElementById('centimetros').addEventListener('input', calcularIMC);
+
+        // Form submit
+        document.getElementById('diabetes-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = {
+                Pregnancies: document.getElementById('Pregnancies').value,
+                Glucose: document.getElementById('Glucose').value,
+                BloodPressure: document.getElementById('BloodPressure').value,
+                SkinThickness: document.getElementById('SkinThickness').value,
+                Insulin: document.getElementById('Insulin').value,
+                BMI: document.getElementById('BMI').value,
+                DiabetesPedigreeFunction: document.getElementById('DiabetesPedigreeFunction').value,
+                Age: document.getElementById('Age').value
+            };
+
+            fetch('predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify([formData])
+            })
+                .then(response => response.json())
+                .then(({ data }) => {
+                    console.log(data)
+
+                    if (data.diabetes) {
+                        document.getElementById('predict-title').innerHTML = `Resultado: Positivo para Diabetes`;
+                        document.getElementById('predict-description').innerHTML = `Olá! Infelizmente, os resultados do seu teste revelaram um diagnóstico positivo para diabetes. É fundamental que você busque ajuda médica o mais breve possível. O diabetes é uma condição que pode ser gerenciada com cuidados adequados, incluindo dieta, exercícios e, possivelmente, medicação. Não se desanime; com o suporte certo, você pode levar uma vida saudável e ativa.`;
+                    } else {
+                        document.getElementById('predict-title').innerHTML = `Resultado: Negativo para Diabetes`;
+                        document.getElementById('predict-description').innerHTML = `Olá! Os resultados do seu teste mostraram que você não tem diabetes. Essa é uma ótima notícia! Lembre-se de que manter um estilo de vida saudável é essencial para prevenir doenças. Continue a se exercitar, comer bem e cuidar de sua saúde. Se você tiver dúvidas sobre sua saúde ou quiser discutir hábitos saudáveis, um profissional de saúde está sempre disponível para ajudar.`;
+                    }
+
+                    setTimeout(showModal, 500);
+
+                })
+                .catch(error => {
+                    document.getElementById('response').innerHTML = `<h3>Error: ${error}</h3>`;
+                });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
