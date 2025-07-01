@@ -1,6 +1,6 @@
 # Predição de diabetes
 
-Este é um aplicativo simples de To-Do List construído para gerenciar tarefas diárias. Ele permite que os usuários adicionem, editem, marquem como concluídas e excluam tarefas de forma fácil e eficiente.
+Este é um aplicativo web simples desenvolvido para prever a probabilidade de um paciente ser diabético com base em dados clínicos. Utiliza um modelo de Machine Learning (Naive Bayes) treinado com um conjunto de dados públicos, integrado a uma API Flask para realizar as predições.
 
 ## Tecnologias Utilizadas
 
